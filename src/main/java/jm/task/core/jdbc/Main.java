@@ -21,19 +21,9 @@ public class Main {
         userDao.saveUser("name3", "lastName3", (byte) 27);
         userDao.saveUser("name4", "lastName4", (byte) 28);
 
-        connection.setAutoCommit(false);
-
         userDao.removeUserById(1);
         userDao.getAllUsers();
         userDao.cleanUsersTable();
-        userDao.saveUser("Sergej", "Tkachenko", (byte) 27);
         userDao.dropUsersTable();
-
-        Savepoint savepoint = connection.setSavepoint();
-
-        connection.rollback();
-        connection.commit();
-
-        connection.releaseSavepoint(savepoint);
     }
 }

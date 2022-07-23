@@ -9,7 +9,6 @@ import java.net.URISyntaxException;
 
 public class Util {
     private static Connection connection = null;
-    private static Util instance = null;
     private Util() {
         try {
             if (connection == null || connection.isClosed())
@@ -38,12 +37,5 @@ public class Util {
         String password = properties.getProperty("password");
 
         return DriverManager.getConnection(url, username, password);
-    }
-
-    public static Util getInstance() {
-        if (instance == null) {
-            instance = new Util();
-        }
-        return instance;
     }
 }

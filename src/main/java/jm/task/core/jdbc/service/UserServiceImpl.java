@@ -8,31 +8,37 @@ import java.sql.*;
 import java.util.*;
 
 public class UserServiceImpl implements UserService {
-    UserDao userDao = new UserDaoJDBCImpl();
+
+    private UserDao userDao = null;
+    public UserServiceImpl() {
+        this.userDao = new UserDaoJDBCImpl();
+    }
     public void createUsersTable() throws SQLException {
         userDao.createUsersTable();
+        System.out.println("The table has been created");
     }
 
     public void dropUsersTable() throws SQLException {
         userDao.dropUsersTable();
+        System.out.println("The table has been dropped");
     }
 
-    public void saveUser(String name, String lastName, byte age) {
+    public void saveUser(String name, String lastName, byte age) throws SQLException {
         userDao.saveUser(name, lastName, age);
         System.out.println("User " + name + " added");
     }
 
-    public void removeUserById(long id) {
+    public void removeUserById(long id) throws SQLException {
         userDao.removeUserById(id);
+        System.out.println("User id " + id + " removed");
     }
 
-    public List<User> getAllUsers() {
-        List<User> users = userDao.getAllUsers();
-        users.forEach(i -> System.out.println(users));
-        return users;
+    public List<User> getAllUsers() throws SQLException {
+        return userDao.getAllUsers();
     }
 
-    public void cleanUsersTable() {
+    public void cleanUsersTable() throws SQLException {
         userDao.cleanUsersTable();
+        System.out.println("The table has been cleared");
     }
 }
